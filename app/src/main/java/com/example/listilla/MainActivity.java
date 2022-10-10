@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-        //Button b3 = (Button) findViewById(R.id.button2);
+        Button b3 = (Button) findViewById(R.id.button3);
+
     }
 }
