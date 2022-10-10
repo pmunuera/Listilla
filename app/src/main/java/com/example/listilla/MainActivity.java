@@ -8,6 +8,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,18 +36,16 @@ public class MainActivity extends AppCompatActivity {
         // Inicialitzem model
         records = new ArrayList<Record>();
         // Afegim alguns exemples
-        records.add( new Record(33,"Manolo") );
-        records.add( new Record(12,"Pepe") );
-        records.add( new Record(42,"Laura") );
+        records.add(new Record(33, "Manolo"));
+        records.add(new Record(12, "Pepe"));
+        records.add(new Record(42, "Laura"));
 
         // Inicialitzem l'ArrayAdapter amb el layout pertinent
-        adapter = new ArrayAdapter<Record>( this, R.layout.list_item, records )
-        {
+        adapter = new ArrayAdapter<Record>(this, R.layout.list_item, records) {
             @Override
-            public View getView(int pos, View convertView, ViewGroup container)
-            {
+            public View getView(int pos, View convertView, ViewGroup container) {
                 // getView ens construeix el layout i hi "pinta" els valors de l'element en la posició pos
-                if( convertView==null ) {
+                if (convertView == null) {
                     // inicialitzem l'element la View amb el seu layout
                     convertView = getLayoutInflater().inflate(R.layout.list_item, container, false);
                 }
@@ -67,12 +66,36 @@ public class MainActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=0;i<500;i++) {
-                    records.add(new Record(100, "Anonymous"));
+                String[] noms = new String[20];
+                noms[0] = "Pablo";
+                noms[1] = "Paco";
+                noms[2] = "Maria";
+                noms[3] = "Hector";
+                noms[4] = "Carla";
+                noms[5] = "Jonadab";
+                noms[6] = "Joan";
+                noms[7] = "Ainoa";
+                noms[8] = "Maite";
+                noms[9] = "Carlos";
+                noms[10] = "Marcos";
+                noms[11] = "Yoli";
+                noms[12] = "Julia";
+                noms[13] = "Carmen";
+                noms[14] = "Antonio";
+                noms[15] = "Pepita";
+                noms[16] = "Jordi";
+                noms[17] = "Rafa";
+                noms[18] = "Leo";
+                noms[19] = "Robert";
+                for (int i = 0; i < 20; i++) {
+                    int num = (int) (Math.random() * (20 - 1));
+                    int user = (int) (Math.random() * (20 - 1));
+                    records.add(new Record(num, noms[user]));
                 }
                 // notificar l'adapter dels canvis al model
                 adapter.notifyDataSetChanged();
             }
         });
+        Button b3 = (Button) findViewById(R.id.button);
     }
 }
