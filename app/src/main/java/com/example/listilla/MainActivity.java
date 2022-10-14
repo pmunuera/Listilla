@@ -1,5 +1,6 @@
 package com.example.listilla;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -97,6 +100,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Button b3 = (Button) findViewById(R.id.button3);
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(records,new Comparator<Record>(){
+                    @Override
+                    public int compare(Record r, Record r1) {
+                        return new Integer(r.intents).compareTo(new Integer(r1.intents));
+                    }
+                });
+                adapter = new ArrayAdapter<Record>(MainActivity.this, R.layout.list_item, records) {
+                    @Override
+                    public View getView(int pos, View convertView, ViewGroup container) {
+                        // getView ens construeix el layout i hi "pinta" els valors de l'element en la posició pos
+                        if (convertView == null) {
+                            // inicialitzem l'element la View amb el seu layout
+                            convertView = getLayoutInflater().inflate(R.layout.list_item, container, false);
+                        }
+                        // "Pintem" valors (també quan es refresca)
+                        ((TextView) convertView.findViewById(R.id.nom)).setText(getItem(pos).nom);
+                        ((TextView) convertView.findViewById(R.id.intents)).setText(Integer.toString(getItem(pos).intents));
+                        return convertView;
+                    }
 
+                };
+                lv.setAdapter(adapter);
+
+            }
+        });
     }
 }
